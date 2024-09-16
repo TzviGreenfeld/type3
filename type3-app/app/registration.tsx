@@ -25,18 +25,19 @@ export default function RegistrationPage() {
     // Handle form submission here
     const user = new User(firstName, lastName, parseInt(age), phoneNumber, 0, 0);
 
-    if (!checkLocationPermissions()) {
-        router.push('/NoLocation');
-        return;
-    }
-
-    Location.getCurrentPositionAsync().then((currLocation: any) => {
-        setLocation({ long: currLocation.coords.longitude, lat: currLocation.coords.latitude });
-        user.setLocation(currLocation.coords.longitude, currLocation.coords.latitude);
-        console.log(user);
-    }).catch((error) => {
-        console.error('Error getting location:', error);
+    checkLocationPermissions().then((results) => {
+        if (!results) {
+            router.replace('/NoLocation');
+            return;
+        }else{
+            Location.getCurrentPositionAsync().then((currLocation: any) => {
+                setLocation({ long: currLocation.coords.longitude, lat: currLocation.coords.latitude });
+                user.setLocation(currLocation.coords.longitude, currLocation.coords.latitude);
+                console.log(user);
+            });
+        }
     });
+    
   };
 
   return (
