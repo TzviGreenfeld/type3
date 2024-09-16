@@ -3,6 +3,7 @@ import PersonMap from "@/components/PersonMap";
 import { User } from "@/types";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
+import { Redirect } from "expo-router";
 import MapView from "react-native-maps";
 
 export default function Index() {
@@ -36,3 +37,4 @@ export default function Index() {
     </View>
   );
 }
+
