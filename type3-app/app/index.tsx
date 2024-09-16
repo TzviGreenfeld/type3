@@ -35,6 +35,8 @@ export default function Index() {
       <Text>Edit app/index.tsx to edit this screen.</Text>
       <PersonMap users={users}></PersonMap>
     </View>
+
+    // <Redirect href="/registration" />
   );
 }
 
