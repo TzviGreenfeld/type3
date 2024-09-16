@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView, Alert } from 'react-native';
+import { StyleSheet, ScrollView, Alert } from 'react-native';
 import { TextInput, Button, Title, Provider as PaperProvider } from 'react-native-paper';
 import { User } from '../constants/User';
 import * as Location from 'expo-location';
@@ -12,7 +12,6 @@ export default function RegistrationPage() {
   const [lastName, setLastName] = useState('');
   const [age, setAge] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [location, setLocation] = useState({ long: 0, lat: 0 });
 
   const checkLocationPermissions = async () => {
     let { status: backgroundStatus } = await Location.requestBackgroundPermissionsAsync();
@@ -31,7 +30,6 @@ export default function RegistrationPage() {
             return;
         }else{
             Location.getCurrentPositionAsync().then((currLocation: any) => {
-                setLocation({ long: currLocation.coords.longitude, lat: currLocation.coords.latitude });
                 user.setLocation(currLocation.coords.longitude, currLocation.coords.latitude);
                 console.log(user);
             });
