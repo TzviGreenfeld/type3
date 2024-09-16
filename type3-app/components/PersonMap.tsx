@@ -2,13 +2,15 @@ import React from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import { StyleSheet } from 'react-native';
 import { haversineDistance } from '../utils/distance'
+import { User } from '@/types';
 
-const PersonMap = () => {
-    const pins = [
-        { latitude: 32.1641, longitude: 34.8254, name: 'Pin 1' }, // Herzliya
-        { latitude: 32.1717, longitude: 34.8250, name: 'Pin 2' }, // Nearby location
-        { latitude: 32.1560, longitude: 34.8321, name: 'Pin 3' }, // Nearby location
-    ];
+
+interface PersonMapProps {
+    users: User[]; // The array of users to be displayed as pins
+}
+
+// Modify the component to receive users as props
+const PersonMap: React.FC<PersonMapProps> = ({ users }) => {
 
     return (
         <MapView
@@ -22,11 +24,11 @@ const PersonMap = () => {
                 longitudeDelta: 0.05,
             }}
         >
-            {pins.map((pin, index) => (
+            {users.map((user, index) => (
                 <Marker
                     key={index}
-                    coordinate={{ latitude: pin.latitude, longitude: pin.longitude }}
-                    title={`${pin.name} [${haversineDistance(pins[0], pin).toFixed(2)} km]`}
+                    coordinate={{ latitude: user.latitude, longitude: user.longitude }}
+                    title={`${user.name} [${haversineDistance(users[0], user).toFixed(2)} km]`}
                 />
             ))}
         </MapView>
