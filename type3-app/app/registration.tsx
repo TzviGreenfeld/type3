@@ -35,9 +35,10 @@ export default function RegistrationPage() {
   };
 
   const checkLocationPermissions = async () => {
-    const { status: backgroundStatus } = await Location.requestBackgroundPermissionsAsync();
-    const { status: foregroundStatus } = await Location.requestForegroundPermissionsAsync();
-    return backgroundStatus === 'granted' && foregroundStatus === 'granted';
+    // const { status: backgroundStatus } = await Location.requestBackgroundPermissionsAsync();
+    // const { status: foregroundStatus } = await Location.requestForegroundPermissionsAsync();
+    // return backgroundStatus === 'granted' && foregroundStatus === 'granted';
+    return true;
   };
 
   const handleSubmit = async () => {
@@ -62,7 +63,7 @@ export default function RegistrationPage() {
       phoneNumber,
       currLocation.coords.longitude,
       currLocation.coords.latitude,
-      expoPushToken || '',
+      expoPushToken?.data || " ",
       deviceId
     );
 
@@ -70,7 +71,7 @@ export default function RegistrationPage() {
     console.log(user);
     try {
       const response = await registerUser(user);
-      console.log("response", response);
+      console.log("response", response.status);
     } catch (error) {
       console.error("Error during registration:", error);
     }

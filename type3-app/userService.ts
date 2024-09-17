@@ -14,9 +14,9 @@ export const registerUser = async (user: User) => {
             deviceId: user.getDeviceId()
         });
 
-        return response.data;
+        return response;
     } catch (error) {
         console.error('Error registering user:', error);
-        throw error;
+        throw error; // Rethrow the error if needed
     }
 };
