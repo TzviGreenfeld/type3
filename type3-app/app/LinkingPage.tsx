@@ -5,24 +5,25 @@ import { View } from "react-native";
 import SmallMapOverview from "@/components/SmallMapOverview";
 import LinkNameLabel from "@/components/LinkNameLabel";
 
+const tempPhone="+972509952527";
 const LinkingPage = () => {
     return (
         <SafeAreaView style={styles.container}>
             <LinkNameLabel name="Israel Israeli" />
             <View style={styles.mapContainer}>
-                <SmallMapOverview askerPoint={{ latitude: 32.0853, longitude: 34.7818 }} donorPoint={{ latitude: 31.0853, longitude: 34.7818 }} />
+                <SmallMapOverview selfPoint={{ latitude: 32.0853, longitude: 34.7818 }} otherPoint={{ latitude: 31.0853, longitude: 34.7818 }} />
             </View>
             <View style={styles.buttonContainer}>
                 <OpenMapButton start={{ latitude: 32.0853, longitude: 34.7818 }} end={{ latitude: 31.0853, longitude: 34.7818 }} />
             </View>
             <View style={styles.buttonContainer}>
-                <CallButton phoneNumber="1234567890" />
+                <CallButton phoneNumber={tempPhone} />
             </View>
             <View style={styles.buttonContainer}>
-                <WhatsappButton phoneNumber="1234567890" />
+                <WhatsappButton phoneNumber={tempPhone} />
             </View>
             <View style={styles.buttonContainer}>
-                <SMSButton phoneNumber="1234567890" />
+                <SMSButton phoneNumber={tempPhone} />
             </View>
         </SafeAreaView>
     );

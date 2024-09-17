@@ -4,36 +4,36 @@ import React from 'react';
 import { Marker } from 'react-native-maps';
 
 interface SmallMapOverviewProps {
-  askerPoint: {
+  selfPoint: {
     latitude: number;
     longitude: number;
   };
-  donorPoint: {
+  otherPoint: {
     latitude: number;
     longitude: number;
   };
 }
 
-const SmallMapOverview: React.FC<SmallMapOverviewProps> = ({ askerPoint, donorPoint }) => {
+const SmallMapOverview: React.FC<SmallMapOverviewProps> = ({ selfPoint, otherPoint }) => {
   return (
     <View style={styles.container}>
       <MapView
         style={styles.map}
         initialRegion={{
-          latitude: (askerPoint.latitude + donorPoint.latitude) / 2,
-          longitude: (askerPoint.longitude + donorPoint.longitude) / 2,
+          latitude: (selfPoint.latitude + otherPoint.latitude) / 2,
+          longitude: (selfPoint.longitude + otherPoint.longitude) / 2,
           latitudeDelta: 1.5,
           longitudeDelta: 1.5,
         }}
       >
         <Marker
-          coordinate={askerPoint}
+          coordinate={selfPoint}
           pinColor="red"
           title="Asker"
           description="Asker's location"
         />
         <Marker
-          coordinate={donorPoint}
+          coordinate={otherPoint}
           pinColor="blue"
           title="Donor"
           description="Donor's location"
