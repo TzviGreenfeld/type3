@@ -35,10 +35,15 @@ export default function RegistrationPage() {
   };
 
   const checkLocationPermissions = async () => {
-    // const { status: backgroundStatus } = await Location.requestBackgroundPermissionsAsync();
-    // const { status: foregroundStatus } = await Location.requestForegroundPermissionsAsync();
-    // return backgroundStatus === 'granted' && foregroundStatus === 'granted';
-    return true;
+    try {
+
+      const { status: backgroundStatus } = await Location.requestBackgroundPermissionsAsync();
+      const { status: foregroundStatus } = await Location.requestForegroundPermissionsAsync();
+      return backgroundStatus === 'granted' && foregroundStatus === 'granted';
+    } catch (error) {
+      console.error("Error getting current location:", error);
+      return true; // for now
+    }
   };
 
   const handleSubmit = async () => {
@@ -71,7 +76,7 @@ export default function RegistrationPage() {
     console.log(user);
     try {
       const response = await registerUser(user);
-      console.log("response", response.status);
+      console.log("response", response.s);
     } catch (error) {
       console.error("Error during registration:", error);
     }
