@@ -1,6 +1,7 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import CallButton from "@/components/CallButton";
 import WhatsappButton from "@/components/WhatsappButton";
+import SMSButton from "@/components/SMSButton";
 import { StyleSheet } from "react-native";
 import { View } from "react-native";
 
@@ -12,6 +13,9 @@ const LinkingPage = () => {
             </View>
             <View style={styles.buttonContainer}>
                 <WhatsappButton phoneNumber="1234567890" />
+            </View>
+            <View style={styles.buttonContainer}>
+                <SMSButton phoneNumber="1234567890" />
             </View>
         </SafeAreaView>
     );
