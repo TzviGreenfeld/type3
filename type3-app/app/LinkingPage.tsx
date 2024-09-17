@@ -2,10 +2,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { CallButton, WhatsappButton, SMSButton } from "@/components/ContactButtons";
 import { StyleSheet } from "react-native";
 import { View } from "react-native";
+import LinkNameLabel from "@/components/LinkNameLabel";
 
 const LinkingPage = () => {
     return (
         <SafeAreaView style={styles.container}>
+            <LinkNameLabel name="Israel Israeli" />
             <View style={styles.buttonContainer}>
                 <CallButton phoneNumber="1234567890" />
             </View>
