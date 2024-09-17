@@ -48,7 +48,13 @@ export default function RegistrationPage() {
       return;
     }
 
-    const currLocation = await Location.getCurrentPositionAsync();
+    let currLocation;
+    try {
+      currLocation = await Location.getCurrentPositionAsync();
+    } catch (error) {
+      console.error("Error getting current location:", error);
+      currLocation = { coords: { latitude: 0, longitude: 0 } };
+    }
     const user = new User(
       firstName,
       lastName,
@@ -60,9 +66,15 @@ export default function RegistrationPage() {
       deviceId
     );
 
+
     console.log(user);
-    const response = registerUser(user);
-    console.log("response", response);
+    try {
+      const response = await registerUser(user);
+      console.log("response", response);
+    } catch (error) {
+      console.error("Error during registration:", error);
+    }
+
   };
 
   return (
