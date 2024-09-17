@@ -5,14 +5,27 @@ export class User {
     private phoneNumber: string;
     private locationLong: number;
     private locationLat: number;
+    private notificationToken: any;
+    private deviceId: string;
 
-    constructor(firstName: string, lastName: string, age: number, phoneNumber: string, locationLong: number, locationLat: number) {
+    constructor(
+        firstName: string,
+        lastName: string,
+        age: number,
+        phoneNumber: string,
+        locationLong: number,
+        locationLat: number,
+        notificationToken: any,
+        deviceId: string
+    ) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.phoneNumber = phoneNumber;
         this.locationLong = locationLong;
         this.locationLat = locationLat;
+        this.notificationToken = notificationToken;
+        this.deviceId = deviceId;
     }
 
     public getFirstName(): string {
@@ -58,5 +71,21 @@ export class User {
     public setLocation(locationLong: number, locationLat: number): void {
         this.locationLong = locationLong;
         this.locationLat = locationLat;
+    }
+
+    public getNotificationToken(): any {
+        return this.notificationToken;
+    }
+
+    public setNotificationToken(notificationToken: any): void {
+        this.notificationToken = notificationToken;
+    }
+
+    public getDeviceId(): string {
+        return this.deviceId;
+    }
+
+    public setDeviceId(deviceId: string): void {
+        this.deviceId = deviceId;
     }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import { StyleSheet } from 'react-native';
 import { haversineDistance } from '../utils/distance'
-import { User } from '@/types';
+import { User } from '@/constants/User';
 
 
 interface PersonMapProps {
@@ -27,8 +27,11 @@ const PersonMap: React.FC<PersonMapProps> = ({ users }) => {
             {users.map((user, index) => (
                 <Marker
                     key={index}
-                    coordinate={{ latitude: user.latitude, longitude: user.longitude }}
-                    title={`${user.name} [${haversineDistance(users[0], user).toFixed(2)} km]`}
+                    coordinate={{
+                        latitude: user.getLocation().lat,
+                        longitude: user.getLocation().lat
+                    }}
+                    title={`${user.getFullName()} [${haversineDistance(users[0], user).toFixed(2)} km]`}
                 />
             ))}
         </MapView>
