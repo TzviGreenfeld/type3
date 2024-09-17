@@ -1,48 +1,75 @@
-import React, { useState } from 'react';
-import { StyleSheet, ScrollView, Alert } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, ScrollView, Platform } from 'react-native';
 import { TextInput, Button, Title, Provider as PaperProvider } from 'react-native-paper';
 import { User } from '../constants/User';
-import * as Location from 'expo-location';
 import { useRouter } from 'expo-router';
+import { usePushNotifications } from '@/hooks/usePushNotifications';
+import * as Location from 'expo-location';
+import * as Application from 'expo-application';
+import { registerUser } from '@/userService';
 
 export default function RegistrationPage() {
   const router = useRouter();
+  const { expoPushToken, notification } = usePushNotifications();
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [age, setAge] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [deviceId, setDeviceId] = useState('');
+
+  useEffect(() => {
+    fetchDeviceId();
+  }, []);
+
+  const fetchDeviceId = async () => {
+    let deviceId: string | null = null;
+
+    if (Platform.OS === 'android') {
+      deviceId = Application.getAndroidId();
+    } else if (Platform.OS === 'ios') {
+      deviceId = await Application.getIosIdForVendorAsync();
+    }
+
+    setDeviceId(deviceId || '');
+  };
 
   const checkLocationPermissions = async () => {
-    let { status: backgroundStatus } = await Location.requestBackgroundPermissionsAsync();
-    let { status: foregroundStatus } = await Location.requestForegroundPermissionsAsync();
-    console.log(backgroundStatus, foregroundStatus);
+    const { status: backgroundStatus } = await Location.requestBackgroundPermissionsAsync();
+    const { status: foregroundStatus } = await Location.requestForegroundPermissionsAsync();
     return backgroundStatus === 'granted' && foregroundStatus === 'granted';
-  }
+  };
 
   const handleSubmit = async () => {
-    // Handle form submission here
-    const user = new User(firstName, lastName, parseInt(age), phoneNumber, 0, 0);
+    const hasLocationPermissions = await checkLocationPermissions();
 
-    checkLocationPermissions().then((results) => {
-        if (!results) {
-            router.replace('/NoLocation');
-            return;
-        }else{
-            Location.getCurrentPositionAsync().then((currLocation: any) => {
-                user.setLocation(currLocation.coords.longitude, currLocation.coords.latitude);
-                console.log(user);
-            });
-        }
-    });
-    
+    if (!hasLocationPermissions) {
+      router.replace('/NoLocation');
+      return;
+    }
+
+    const currLocation = await Location.getCurrentPositionAsync();
+    const user = new User(
+      firstName,
+      lastName,
+      parseInt(age),
+      phoneNumber,
+      currLocation.coords.longitude,
+      currLocation.coords.latitude,
+      expoPushToken || '',
+      deviceId
+    );
+
+    console.log(user);
+    const response = registerUser(user);
+    console.log("response", response);
   };
 
   return (
     <PaperProvider>
       <ScrollView contentContainerStyle={styles.container}>
         <Title style={styles.title}>Registration</Title>
-        
+
         <TextInput
           label="First Name"
           value={firstName}
@@ -50,7 +77,7 @@ export default function RegistrationPage() {
           mode="outlined"
           style={styles.input}
         />
-        
+
         <TextInput
           label="Last Name"
           value={lastName}
@@ -58,7 +85,7 @@ export default function RegistrationPage() {
           mode="outlined"
           style={styles.input}
         />
-        
+
         <TextInput
           label="Age"
           value={age}
@@ -76,7 +103,7 @@ export default function RegistrationPage() {
           mode="outlined"
           style={styles.input}
         />
-        
+
         <Button mode="contained" onPress={handleSubmit} style={styles.button}>
           Submit
         </Button>
@@ -104,4 +131,3 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 });
-
