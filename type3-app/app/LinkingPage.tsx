@@ -1,7 +1,5 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import CallButton from "@/components/CallButton";
-import WhatsappButton from "@/components/WhatsappButton";
-import SMSButton from "@/components/SMSButton";
+import { CallButton, WhatsappButton, SMSButton } from "@/components/ContactButtons";
 import { StyleSheet } from "react-native";
 import { View } from "react-native";
 
