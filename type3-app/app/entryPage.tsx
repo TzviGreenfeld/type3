@@ -11,9 +11,9 @@ const EntryPage = () => {
             const token = await AsyncStorage.getItem('token');
             console.log('Token:', token);
             if (token) {
-                router.push('/button_page');
+                router.replace('/button_page');
             } else {
-                router.push('/registration');
+                router.replace('/registration');
             }
         };
         checkToken();
