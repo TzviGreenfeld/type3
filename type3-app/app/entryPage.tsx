@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { usePushNotifications } from "@/hooks/usePushNotifications";
 
 const EntryPage = () => {
-  const { expoPushToken, notification } = usePushNotifications();
+  // const { expoPushToken, notification } = usePushNotifications();
 
   const router = useRouter();
   console.log("EntryPage");
