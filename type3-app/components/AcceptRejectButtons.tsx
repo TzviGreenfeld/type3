@@ -3,22 +3,36 @@ import { View } from "react-native";
 import { StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { completeRequest } from "@/scripts/requestService";
-
+import api from "@/api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const router = useRouter();
 const onReject = () => {
-    console.log("Reject");
-    router.replace('/button_page');
-}
+  console.log("Reject");
+  router.replace("/button_page");
+};
 const onAccept = async (requestId: string) => {
-    console.log("Accept");
-    const response = await completeRequest(requestId);  
-    console.log(response);
-    router.push({
-    pathname: '/LinkingPage',
-    params: { resultJson: JSON.stringify(response.data), showType: "response"}
-    });
-}
+  console.log("Accept");
+  const response2 = await api.post(
+    `/api/Request/${requestId}/complete`,
+    {},
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${await AsyncStorage.getItem("token")}`,
+      },
+    }
+  );
+  console.log(response2);
+  router.push({
+    pathname: "/LinkingPage",
+    params: {
+      resultJson: JSON.stringify(response2.data),
+      showType: "response",
+    },
+  });
+};
+
 const AcceptRejectButtons = ({ requestId }: { requestId: string }) => {
   return (
     <View style={styles.buttonContainer}>
