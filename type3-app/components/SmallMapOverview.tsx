@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
 
     width: screenWidth,
-    height: screenWidth * 0.6,
+    height: screenWidth * 0.5,
     backgroundColor: "red",
   },
   map: {
