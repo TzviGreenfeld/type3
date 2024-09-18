@@ -1,4 +1,4 @@
-import { SafeAreaView} from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Text } from "react-native";
 import RadarAnimation from "../components/RadarAnimation";
 import { StyleSheet } from "react-native";
@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { startRequest, getRequest } from "../scripts/requestService";
 import { Request } from "../constants/Request";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ActivityIndicator } from "react-native-paper";
 
 const SearchingPage = () => {
   AsyncStorage.setItem('resultUser', "");
@@ -38,10 +39,9 @@ const SearchingPage = () => {
   
   return (
     <SafeAreaView style={styles.container}>
-      <RadarAnimation size={300} color="gray" speed={3}/>
+      {/* <RadarAnimation size={300} color="gray" speed={3}/> */}
+      <ActivityIndicator animating={true} color={"#19437D"} size={150} />
       <Text style={styles.searchingText}>Searching...</Text>
-
-
     </SafeAreaView>
   );
 };
@@ -49,13 +49,13 @@ const SearchingPage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   searchingText: {
     marginTop: 20,
     fontSize: 18,
-    color: 'gray',
+    color: "gray",
   },
 });
 
