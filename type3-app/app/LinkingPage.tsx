@@ -5,25 +5,34 @@ import { View } from "react-native";
 import SmallMapOverview from "@/components/SmallMapOverview";
 import LinkNameLabel from "@/components/LinkNameLabel";
 
-const tempPhone="+972509952527";
+import React, { useEffect } from 'react';
+import { RouteProp, useRoute } from '@react-navigation/native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+type LinkingPageRouteProp = RouteProp<{ params: { resultJson: string } }, 'params'>;
+
 const LinkingPage = () => {
+    const route = useRoute<LinkingPageRouteProp>();
+    const result = JSON.parse(route.params.resultJson);
+    const name = result.responseUser.firstName + " " + result.responseUser.lastName;
+    console.log(result)
     return (
         <SafeAreaView style={styles.container}>
-            <LinkNameLabel name="Israel Israeli" />
+            <LinkNameLabel name={name} />
             <View style={styles.mapContainer}>
-                <SmallMapOverview selfPoint={{ latitude: 32.0853, longitude: 34.7818 }} otherPoint={{ latitude: 31.0853, longitude: 34.7818 }} />
+                <SmallMapOverview selfPoint={result.requestUser.location} otherPoint={result.responseUser.location} />
             </View>
             <View style={styles.buttonContainer}>
-                <OpenMapButton start={{ latitude: 32.0853, longitude: 34.7818 }} end={{ latitude: 31.0853, longitude: 34.7818 }} />
+                <OpenMapButton start={result.requestUser.location} end={result.responseUser.location} />
             </View>
             <View style={styles.buttonContainer}>
-                <CallButton phoneNumber={tempPhone} />
+                <CallButton phoneNumber={result.responseUser.phoneNumber} />
             </View>
             <View style={styles.buttonContainer}>
-                <WhatsappButton phoneNumber={tempPhone} />
+                <WhatsappButton phoneNumber={result.responseUser.phoneNumber} />
             </View>
             <View style={styles.buttonContainer}>
-                <SMSButton phoneNumber={tempPhone} />
+                <SMSButton phoneNumber={result.responseUser.phoneNumber} />
             </View>
         </SafeAreaView>
     );

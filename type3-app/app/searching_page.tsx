@@ -22,10 +22,11 @@ const SearchingPage = () => {
         console.log('Request status:', response.data.status);
         if (response.data.status === 'Completed') {
           await AsyncStorage.setItem('requestId', "");
-          await AsyncStorage.setItem('targetUserId', response.data.responseUserId);
-          await AsyncStorage.setItem('userId', response.data.requestUserId);
           clearInterval(interval);
-          router.push('/results_page');
+          router.push({
+          pathname: '/LinkingPage',
+          params: { resultJson: JSON.stringify(response.data) }
+          });
         }
       }
       else {
