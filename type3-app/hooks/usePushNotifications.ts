@@ -5,6 +5,7 @@ import * as Notifications from "expo-notifications";
 import Constants from "expo-constants";
 
 import { Platform } from "react-native";
+import { useRouter } from "expo-router";
 
 export interface PushNotificationState {
   expoPushToken?: Notifications.ExpoPushToken;
@@ -29,7 +30,8 @@ export const usePushNotifications = (): PushNotificationState => {
   >();
 
   const notificationListener = useRef<Notifications.Subscription>();
-  const responseListener = useRef<Notifications.Subscription>();
+  const responseListener = useRef<Notifications.Subscription>(); 
+  const router = useRouter();
 
   async function registerForPushNotificationsAsync() {
     let token;
@@ -77,11 +79,15 @@ export const usePushNotifications = (): PushNotificationState => {
         setNotification(notification);
       });
 
-    responseListener.current =
-      Notifications.addNotificationResponseReceivedListener((response) => {
-        console.log(response);
+      responseListener.current = Notifications.addNotificationResponseReceivedListener((response) => {
+        const requestId = response.notification.request.content.data.requestId as string; // Assuming requestId is passed in the data
+        console.log("Notification clicked, requestId:", requestId);
+        router.push({
+          pathname: '/AcceptReject',
+          params: { requestId }
+          });
       });
-
+  
     return () => {
       Notifications.removeNotificationSubscription(
         notificationListener.current!
