@@ -72,6 +72,9 @@ export default function RegistrationPage() {
     try {
       const response = await registerUser(user);
       console.log("response", response.status);
+      if (response.status === 200 || response.status === 201) {
+        router.replace("/button_page");
+      }
     } catch (error) {
       console.error("Error during registration:", error);
     }
