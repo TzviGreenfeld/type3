@@ -6,6 +6,7 @@ import { completeRequest } from "@/scripts/requestService";
 
 const onReject = () => {
     const router = useRouter();
+    console.log("Reject");
     router.replace('/button_page');
 }
 const onAccept = async (requestId: string) => {
