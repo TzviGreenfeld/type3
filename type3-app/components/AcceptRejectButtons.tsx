@@ -1,12 +1,28 @@
 import { Button } from "react-native-paper";
 import { View } from "react-native";
 import { StyleSheet } from "react-native";
+import { useRouter } from "expo-router";
+import { completeRequest } from "@/scripts/requestService";
 
-const AcceptRejectButtons = () => {
+const onReject = () => {
+    const router = useRouter();
+    router.replace('/button_page');
+}
+const onAccept = async (requestId: string) => {
+    console.log("Accept");
+    const response = await completeRequest(requestId);  
+    console.log(response);
+    const router = useRouter();
+    router.push({
+    pathname: '/LinkingPage',
+    params: { resultJson: JSON.stringify(response.data), showType: "response"}
+    });
+}
+const AcceptRejectButtons = ({ requestId }: { requestId: string }) => {
     return (
             <View style={styles.buttonContainer}>
-                <Button mode="contained" onPress={() => {}} style={styles.acceptButton}>Accept</Button>
-                <Button mode="contained" onPress={() => {}} style={styles.rejectButton}>Reject</Button>
+                <Button mode="contained" onPress={() => onAccept(requestId)} style={styles.acceptButton}>Accept</Button>
+                <Button mode="contained" onPress={onReject} style={styles.rejectButton}>Reject</Button>
             </View>
     );
 }

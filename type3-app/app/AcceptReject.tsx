@@ -22,7 +22,7 @@ const AcceptReject = () => {
           selfPoint={{ latitude: 32.0853, longitude: 34.7818 }}
           otherPoint={{ latitude: 31.0853, longitude: 34.7818 }}
         />
-        <AcceptRejectButtons />
+        <AcceptRejectButtons requestId={requestId} />
       </View>
     </SafeAreaView>
   );

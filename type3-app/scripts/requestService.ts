@@ -50,3 +50,26 @@ export const getRequest = async (requestId: string) => {
         throw error;
     }
 };
+
+export const completeRequest = async (requestId: string) => {
+    console.log('complete request');
+    try {
+        const response = await api.post(`/api/Request/${requestId}/complete`,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${await AsyncStorage.getItem('token')}`
+                }
+            });
+        console.log(response.data);
+        return response;
+    } catch (error) {
+        const headers = error.config?.headers;
+        if (headers) {
+            console.error('Request headers:', headers);
+        }
+
+        console.error('Error creating request:', error);
+        throw error;
+    }
+};
