@@ -8,6 +8,7 @@ import { startRequest, getRequest } from "../scripts/requestService";
 import { Request } from "../constants/Request";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ActivityIndicator } from "react-native-paper";
+import { Image } from "react-native";
 
 const SearchingPage = () => {
   AsyncStorage.setItem('resultUser', "");
@@ -41,7 +42,8 @@ const SearchingPage = () => {
   return (
     <SafeAreaView style={styles.container}>
       {/* <RadarAnimation size={300} color="gray" speed={3}/> */}
-      <ActivityIndicator animating={true} color={"#19437D"} size={150} />
+      {/* <ActivityIndicator animating={true} color={"#19437D"} size={150} /> */}
+      <Image source={require('../assets/images/radar.gif')} style={styles.radarImage}/>
       <Text style={styles.searchingText}>Searching...</Text>
     </SafeAreaView>
   );
@@ -52,6 +54,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  radarImage: {
+    width: 300,
+    height: 300,
   },
   searchingText: {
     marginTop: 20,
