@@ -67,7 +67,7 @@ export default function RegistrationPage() {
       currLocation = await Location.getCurrentPositionAsync();
     } catch (error) {
       console.error("Error getting current location:", error);
-      currLocation = { coords: { latitude: 0, longitude: 0 } };
+      currLocation = { coords: { latitude: 32.1624, longitude: 34.8447 } };
     }
     const user = new User(
       firstName,
