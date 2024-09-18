@@ -39,3 +39,52 @@ export const loginUser = async (phone: string) => {
         throw error; // Rethrow the error if needed
     }
 }
+
+export const getUserById = async (userId: string) => {
+    try {
+        const response = await api.get(`/api/Users/${userId}`); // add headers
+
+        const respondingUserData = response.data
+        const user = new User(
+            respondingUserData.firstName,
+            respondingUserData.lastName,
+            0,
+            respondingUserData.phone,
+            respondingUserData.age,
+            respondingUserData.location,
+            respondingUserData.notificationToken,
+            respondingUserData.deviceId
+        );
+
+        console.log(`got user: ${user.getFullName()}`);
+        return user;
+
+    } catch (error) {
+        console.error('Error getting user:', error);
+        return null;
+    }   
+}
+
+export const getRequestingUserByRequestId = async (requestId: string ) => {
+    try {
+        const response = await api.get(`/api/Request/${requestId}`); // add headers
+        
+        const requestingUserData = response.data.requestUser;
+        const user = new User(
+            requestingUserData.firstName,
+            requestingUserData.lastName,
+            0,
+            requestingUserData.phone,
+            requestingUserData.age,
+            requestingUserData.location,
+            requestingUserData.notificationToken,
+            requestingUserData.deviceId
+        );
+        console.log(`got request: ${response.data}`);
+        return user;
+        
+    } catch (error) {
+        console.error('Error getting user:', error);
+        return null;
+    }
+}
