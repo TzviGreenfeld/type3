@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import api from './api'; 
+import api from './api';
 import { User } from './constants/User';
 
 export const registerUser = async (user: User) => {
@@ -42,7 +42,14 @@ export const loginUser = async (phone: string) => {
 
 export const getUserById = async (userId: string) => {
     try {
-        const response = await api.get(`/api/Users/${userId}`); // add headers
+        const response = await api.get(`/api/Users/${userId}`,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${await AsyncStorage.getItem('token')}`
+                }
+            }
+        ); // add headers
 
         const respondingUserData = response.data
         const user = new User(
@@ -62,13 +69,19 @@ export const getUserById = async (userId: string) => {
     } catch (error) {
         console.error('Error getting user:', error);
         return null;
-    }   
+    }
 }
 
-export const getRequestingUserByRequestId = async (requestId: string ) => {
+export const getRequestingUserByRequestId = async (requestId: string) => {
     try {
-        const response = await api.get(`/api/Request/${requestId}`); // add headers
-        
+        const response = await api.get(`/api/Request/${requestId}`,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${await AsyncStorage.getItem('token')}`
+                }
+            }); // add headers
+
         const requestingUserData = response.data.requestUser;
         const user = new User(
             requestingUserData.firstName,
@@ -82,7 +95,7 @@ export const getRequestingUserByRequestId = async (requestId: string ) => {
         );
         console.log(`got request: ${response.data}`);
         return user;
-        
+
     } catch (error) {
         console.error('Error getting user:', error);
         return null;

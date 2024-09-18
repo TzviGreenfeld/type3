@@ -2,7 +2,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import CircleButton from "../components/CircleButton";
 import { StyleSheet } from "react-native";
 import { Text } from "react-native-paper";
-export default function Index() {
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const buttonPage = () => {
+  AsyncStorage.setItem('requestId', "");
   return (
     <SafeAreaView style={styles.container}>
         <Text style={styles.sosText}>SOS{'\n'}Insulin!</Text>
@@ -10,6 +13,9 @@ export default function Index() {
     </SafeAreaView>
   );
 }
+buttonPage.navigationOptions = {
+  headerShown: false,
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -26,3 +32,4 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 });
+export default buttonPage;

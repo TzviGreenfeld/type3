@@ -2,7 +2,6 @@ import React from "react";
 import { View, StyleSheet, Pressable } from "react-native";
 import { FAB, IconButton } from "react-native-paper";
 import { Link } from "expo-router";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 //circle button for the bottom of the page
 const SaveButton = () => {
