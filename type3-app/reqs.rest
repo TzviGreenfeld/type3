@@ -28,7 +28,8 @@ Authorization: Bearer {{Token}}
 
 ###
 # GET {{Type3_Backend_HostAddress}}/api/Request/736894ed-b01d-4602-bd55-b76094ba375b
-GET {{Type3_Backend_HostAddress}}/api/Request/1b229ad1-5c3b-4700-bbca-859047e8d097
+GET {{Type3_Backend_HostAddress}}/api/Request/d9be8846-5570-4693-9d41-063f1cf1b426
+ 
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer {{Token}}

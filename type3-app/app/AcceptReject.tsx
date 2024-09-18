@@ -5,7 +5,7 @@ import SmallMapOverview from "@/components/SmallMapOverview";
 import AcceptRejectLabel from "@/components/AcceptRejectLabel";
 import { View } from "react-native";
 import { RouteProp, useRoute } from "@react-navigation/native";
-import { getUserById, getRequestingUserByRequestId } from "@/userService";
+import { getRequestingUserByRequestId } from "@/userService";
 import { User } from "@/constants/User";
 import { useEffect, useState } from "react";
 
