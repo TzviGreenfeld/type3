@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     nameText: {
-        color: 'grey',
+        color: '23408e',
         fontSize: 50,
         fontWeight: 'bold',
     },
