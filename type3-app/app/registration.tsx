@@ -87,7 +87,7 @@ export default function RegistrationPage() {
       console.log("response", response.status);
       if (response.status === 200 || response.status === 201) {
         await loginUser(user.getPhoneNumber());
-        
+
         router.replace("/button_page");
       }
     } catch (error) {

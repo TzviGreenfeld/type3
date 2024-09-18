@@ -1,0 +1,50 @@
+@Type3_Backend_HostAddress = https://type3-fhbqaaerb4cdere4.eastus2-01.azurewebsites.net
+# @Type3_Backend_HostAddress = https://localhost:7087
+@Token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwNTQ0NDQ0NDQiLCJqdGkiOiJlZmYxNjcxNS1lNWY0LTRmOWYtYTk2MC1kNjAwODFjNmIyMTgiLCJleHAiOjE3MjY3MTI3MzYsImlzcyI6IllvdXJJc3N1ZXIiLCJhdWQiOiJZb3VyQXVkaWVuY2UifQ.0JEeOQEbxZcwuOpop4EHiXRXZitUS7pePhrFXqsXRx0
+
+POST {{Type3_Backend_HostAddress}}/api/Request/start
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{Token}}
+
+{
+  "type": "string"
+}
+###
+
+POST {{Type3_Backend_HostAddress}}/api/Auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "phoneNumber": "054444444"
+}
+
+###
+
+GET {{Type3_Backend_HostAddress}}/api/Users/736894ed-b01d-4602-bd55-b76094ba375b
+Accept: application/json
+Authorization: Bearer {{Token}}
+
+###
+GET {{Type3_Backend_HostAddress}}/api/Request/736894ed-b01d-4602-bd55-b76094ba375b
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{Token}}
+
+###
+POST {{Type3_Backend_HostAddress}}/api/Request/7ad3b3b6-3c06-4baa-a755-8cdddad13da8/complete
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{Token}}
+
+###
+# POST https://exp.host/--/api/v2/push/send
+# Content-Type: application/json
+
+# {
+#   "to": "ExponentPushToken[9mlSP9KNUjTaKdLWdEdy8z]",
+#   "title": "omer",
+#   "body": "boy"
+# }
+
