@@ -25,7 +25,7 @@ const SearchingPage = () => {
           clearInterval(interval);
           router.push({
           pathname: '/LinkingPage',
-          params: { resultJson: JSON.stringify(response.data) }
+          params: { resultJson: JSON.stringify(response.data), showType: "request"}
           });
         }
       }
