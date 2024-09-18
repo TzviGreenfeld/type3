@@ -4,15 +4,24 @@ import RadarAnimation from "../components/RadarAnimation";
 import { StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { useEffect } from "react";
+import { startRequest } from "../scripts/requestService";
+import { Request } from "../constants/Request";
 
 const SearchingPage = () => {
   const router = useRouter();
   useEffect(() => {
-    const timer = setTimeout(() => {
-      router.push('/results_page');
-    }, 3000);
-
-    return () => clearTimeout(timer);
+    const request = new Request(
+      "a452d9c6-c690-47c6-9aee-bea38cfb7979",
+      "a452d9c6-c690-47c6-9aee-bea38cfb7979",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1"
+    );
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwNTQ0NDQ0NDQiLCJqdGkiOiI0Y2VjNzdlMC1hMzg1LTQ2MDAtOGEwYS0yOGE1MDg1MmE2OGMiLCJleHAiOjE3MjY2OTcwMjUsImlzcyI6IllvdXJJc3N1ZXIiLCJhdWQiOiJZb3VyQXVkaWVuY2UifQ.9wMZqANLtD9DY3ZV0M0yvpdYmykl_tLo2fZsS2VNfi8"
+    startRequest(token);
   }, []);
   return (
     <SafeAreaView style={styles.container}>
