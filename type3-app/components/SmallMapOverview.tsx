@@ -18,13 +18,16 @@ const SmallMapOverview: React.FC<SmallMapOverviewProps> = ({
   selfPoint,
   otherPoint,
 }) => {
+  console.log((selfPoint.latitude + otherPoint.latitude) / 2);
+  console.log((selfPoint.longitude + otherPoint.longitude) / 2);
+
   return (
     <View style={styles.container}>
       <MapView
         style={styles.map}
         initialRegion={{
-          latitude: (selfPoint.latitude + otherPoint.latitude) / 2,
-          longitude: (selfPoint.longitude + otherPoint.longitude) / 2,
+          latitude: 32.1624,
+          longitude: 34.8447,
           latitudeDelta: 1.5,
           longitudeDelta: 1.5,
         }}
