@@ -17,7 +17,7 @@ import { useRouter } from "expo-router";
 import { usePushNotifications } from "@/hooks/usePushNotifications";
 import * as Location from "expo-location";
 import * as Application from "expo-application";
-import { registerUser } from "@/userService";
+import { loginUser, registerUser } from "@/userService";
 
 export default function RegistrationPage() {
   const router = useRouter();
@@ -86,6 +86,8 @@ export default function RegistrationPage() {
       const response = await registerUser(user);
       console.log("response", response.status);
       if (response.status === 200 || response.status === 201) {
+        await loginUser(user.getPhoneNumber());
+        
         router.replace("/button_page");
       }
     } catch (error) {

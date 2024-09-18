@@ -1,0 +1,25 @@
+import { useRouter } from 'expo-router';
+import React, { useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const EntryPage: React.FC = () => {
+    const router = useRouter();
+    console.log('EntryPage');
+    useEffect(() => {
+        const checkToken = async () => {
+            
+            const token = await AsyncStorage.getItem('token');
+            console.log('Token:', token);
+            if (token) {
+                router.push('/button_page');
+            } else {
+                router.push('/registration');
+            }
+        };
+        checkToken();
+    }, [router]);
+
+    return null;
+};
+
+export default EntryPage;

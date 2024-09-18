@@ -5,7 +5,7 @@ export default function Index() {
   return (
 
     <>
-      <Redirect href="/registration" />
+      <Redirect href="/entryPage" />
     </>
   );
 }
