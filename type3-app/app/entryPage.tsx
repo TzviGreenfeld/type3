@@ -2,7 +2,7 @@ import { useRouter } from 'expo-router';
 import React, { useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const EntryPage: React.FC = () => {
+const EntryPage = () => {
     const router = useRouter();
     console.log('EntryPage');
     useEffect(() => {
@@ -20,6 +20,9 @@ const EntryPage: React.FC = () => {
     }, [router]);
 
     return null;
+};
+EntryPage.navigationOptions = {
+    headerShown: false,
 };
 
 export default EntryPage;
