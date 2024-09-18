@@ -1,7 +1,7 @@
-import { View, StyleSheet } from "react-native";
-import MapView from 'react-native-maps';
-import React from 'react';
-import { Marker } from 'react-native-maps';
+import { View, StyleSheet, Dimensions } from "react-native";
+import MapView from "react-native-maps";
+import React from "react";
+import { Marker } from "react-native-maps";
 
 interface SmallMapOverviewProps {
   selfPoint: {
@@ -14,7 +14,10 @@ interface SmallMapOverviewProps {
   };
 }
 
-const SmallMapOverview: React.FC<SmallMapOverviewProps> = ({ selfPoint, otherPoint }) => {
+const SmallMapOverview: React.FC<SmallMapOverviewProps> = ({
+  selfPoint,
+  otherPoint,
+}) => {
   return (
     <View style={styles.container}>
       <MapView
@@ -43,12 +46,15 @@ const SmallMapOverview: React.FC<SmallMapOverviewProps> = ({ selfPoint, otherPoi
   );
 };
 
+const { width: screenWidth } = Dimensions.get("window");
 const styles = StyleSheet.create({
   container: {
-    width: 200,
-    height: 200,
     borderRadius: 10,
-    overflow: 'hidden',
+    overflow: "hidden",
+
+    width: screenWidth,
+    height: screenWidth * 0.6,
+    backgroundColor: "red",
   },
   map: {
     ...StyleSheet.absoluteFillObject,
@@ -56,4 +62,3 @@ const styles = StyleSheet.create({
 });
 
 export default SmallMapOverview;
-
