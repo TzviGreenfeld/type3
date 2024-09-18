@@ -21,10 +21,10 @@ type LinkingPageRouteProp = RouteProp<
 const LinkingPage = () => {
   const route = useRoute<LinkingPageRouteProp>();
   const result = JSON.parse(route.params.resultJson);
-  const name =
-    result.responseUser.firstName + " " + result.responseUser.lastName;
   console.log(result);
   if (route.params.showType === "request") {
+    const name =
+    result.responseUser.firstName + " " + result.responseUser.lastName;
     return (
       <SafeAreaView style={styles.container}>
         <LinkNameLabel name={name} />
@@ -52,6 +52,8 @@ const LinkingPage = () => {
       </SafeAreaView>
     );
   } else {
+    const name =
+    result.requestUser.firstName + " " + result.requestUser.lastName;
     return (
       <SafeAreaView style={styles.container}>
         <LinkNameLabel name={name} />
