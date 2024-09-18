@@ -74,13 +74,14 @@ export const getUserById = async (userId: string) => {
 
 export const getRequestingUserByRequestId = async (requestId: string) => {
     try {
+        console.log('get request', requestId);
         const response = await api.get(`/api/Request/${requestId}`,
             {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${await AsyncStorage.getItem('token')}`
                 }
-            }); // add headers
+            });
 
         const requestingUserData = response.data.requestUser;
         const user = new User(
@@ -88,8 +89,8 @@ export const getRequestingUserByRequestId = async (requestId: string) => {
             requestingUserData.lastName,
             0,
             requestingUserData.phone,
-            requestingUserData.age,
-            requestingUserData.location,
+            requestingUserData.location.longitude,
+            requestingUserData.location.latitude,
             requestingUserData.notificationToken,
             requestingUserData.deviceId
         );

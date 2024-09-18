@@ -36,7 +36,7 @@ const AcceptReject = () => {
         <SmallMapOverview
           selfPoint={{ latitude: 32.1624, longitude: 34.8447 }}
           otherPoint={{
-            latitude: requestingUserData?.getLocation().lat,
+            latitude: requestingUserData.getLocation().lat,
             longitude: requestingUserData?.getLocation().long,
           }}
         />
