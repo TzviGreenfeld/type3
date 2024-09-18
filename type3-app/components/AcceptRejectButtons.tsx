@@ -4,8 +4,9 @@ import { StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { completeRequest } from "@/scripts/requestService";
 
+
+const router = useRouter();
 const onReject = () => {
-    const router = useRouter();
     console.log("Reject");
     router.replace('/button_page');
 }
@@ -13,7 +14,6 @@ const onAccept = async (requestId: string) => {
     console.log("Accept");
     const response = await completeRequest(requestId);  
     console.log(response);
-    const router = useRouter();
     router.push({
     pathname: '/LinkingPage',
     params: { resultJson: JSON.stringify(response.data), showType: "response"}
